@@ -62,14 +62,14 @@ class Watcher(object):
                 continue
             _path = config.path_to_watch + f.path
             if os.path.exists(_path):
-                logger.info('rm %s' % _path)
+                logger.info('Deleting %s' % _path)
                 os.remove(_path)
         for d in folder.deleted_dirs:
             if f.path in ('/', config.path_to_watch):
                 continue
             _path = config.path_to_watch + d.path
             if os.path.exists(_path):
-                logger.info('rm -rf %s' % _path)
+                logger.info('Recursively deleting %s' % _path)
                 shutil.rmtree(_path)
 
     def clean(self):
@@ -77,7 +77,7 @@ class Watcher(object):
         remove all files in watching dir
         """
         if os.path.exists(config.path_to_watch):
-            logger.info('rm -rf %s' % config.path_to_watch)
+            logger.info('Recursively deleting %s' % config.path_to_watch)
             shutil.rmtree(config.path_to_watch)
 
     def sync_download(self):

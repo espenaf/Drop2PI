@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 import socket
+import shutil
 
 from .config import config
 from .utils import get_logger
@@ -101,7 +102,7 @@ class Client(object):
         client = config.client
         try:
             client.file_delete(server_path)
-            os.system('rm -rf %s' % local_path)
+            shutil.rmtree(local_path)
         except:
             logger.error('delete file error')
             return False
@@ -136,7 +137,7 @@ class Client(object):
         from file_path to save_to_path
         """
         if d2_files_list.has_value(save_to_path):
-            logger.info('file %s in downloaded list, not download'
+            logger.info('file %s in downloaded list, will not again download'
                         % file_path)
             return False
         r = cls._download(file_path, save_to_path)
